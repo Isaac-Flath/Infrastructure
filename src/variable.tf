@@ -3,3 +3,9 @@ variable "instance_name" {
   type        = string
   default     = "ExampleAppServerInstance2"
 }
+
+# variable "redshift_cluster_1_pass" {
+#   type    = string
+#   default = ""
+# }
+

@@ -1,3 +1,6 @@
+.DS_Store
+credstash.log
+
 # Local .terraform directories
 **/.terraform/*
 
