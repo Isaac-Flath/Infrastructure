@@ -2,7 +2,7 @@ terraform {
   cloud {
     organization = "isaac-flath"
     workspaces {
-      name = "tfc-aws"
+      name = "tfc-aws-data-eng"
     }
   }
 
@@ -19,9 +19,6 @@ terraform {
 provider "aws" {
   region = "us-east-1"
 }
-
-
-
 
 resource "aws_s3_bucket" "udacitydataengineeringaws" {
   bucket = "udacitydataengineeringaws"

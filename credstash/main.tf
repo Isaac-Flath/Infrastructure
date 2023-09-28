@@ -2,7 +2,7 @@ terraform {
   cloud {
     organization = "isaac-flath"
     workspaces {
-      name = "tfc-aws"
+      name = "tfc-aws-credstash"
     }
   }
 

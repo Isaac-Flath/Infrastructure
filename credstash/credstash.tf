@@ -13,9 +13,9 @@ resource "aws_dynamodb_table" "db_credstash" {
     name = "version"
     type = "S"
   }
-  lifecycle {
-    prevent_destroy = true
-  }
+  # lifecycle {
+  #   prevent_destroy = true
+  # }
 }
 output "arn" { value = aws_dynamodb_table.db_credstash.arn }
 
