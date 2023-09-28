@@ -86,7 +86,6 @@ def terraform(project, cmd):
     elif cmd in ("plan","apply","destroy"):
         args = load_arguments(project)
         command = f'terraform {cmd} {args}'
-        print(f'command: {command}')
         commands.append(command)
     else:
         print("Command not supported")
