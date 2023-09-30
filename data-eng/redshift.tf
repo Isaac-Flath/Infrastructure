@@ -1,5 +1,5 @@
-resource "aws_iam_role" "myRedshiftRole2" {
-  name = "myRedshiftRole2"
+resource "aws_iam_role" "RedshiftRole" {
+  name = "RedshiftRole"
 
   assume_role_policy = jsonencode({
 
@@ -16,13 +16,13 @@ resource "aws_iam_role" "myRedshiftRole2" {
   })
 }
 
-resource "aws_iam_role_policy_attachment" "redshift_etl_s3_read_only2" {
-  role       = aws_iam_role.myRedshiftRole2.name
+resource "aws_iam_role_policy_attachment" "redshift_etl_s3_read_only" {
+  role       = aws_iam_role.RedshiftRole.name
   policy_arn = "arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess"
 }
 
-resource "aws_security_group" "redshift_security_group2" {
-  name   = "redshift_security_group2"
+resource "aws_security_group" "redshift_security_group" {
+  name   = "redshift_security_group"
   vpc_id = "vpc-63e47f19" # Select this default VPC automatically?
 
   ingress {
@@ -43,25 +43,25 @@ resource "aws_security_group" "redshift_security_group2" {
 
 }
 
-resource "aws_iam_user" "test-conupdate-31392" {
-  name = "test-conupdate-31392"
+resource "aws_iam_user" "Redshift-ETL-user" {
+  name = "Redshift-ETL-user"
   # May need to programatically create access key
 }
 
-resource "aws_iam_user_policy_attachment" "s3attach1" {
-  user       = aws_iam_user.test-conupdate-31392.name
+resource "aws_iam_user_policy_attachment" "Reshift-ETL-User-S3-Attach" {
+  user       = aws_iam_user.Redshift-ETL-user.name
   policy_arn = "arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess"
 
 }
-resource "aws_iam_user_policy_attachment" "s3attach2" {
-  user       = aws_iam_user.test-conupdate-31392.name
+resource "aws_iam_user_policy_attachment" "Reshift-ETL-User-RS-Attach" {
+  user       = aws_iam_user.Redshift-ETL-user.name
   policy_arn = "arn:aws:iam::aws:policy/AmazonRedshiftFullAccess"
 }
 
-resource "aws_redshift_cluster" "redshift-cluster-2" {
-  cluster_identifier     = "redshift-cluster-2"
+resource "aws_redshift_cluster" "redshift-cluster-1" {
+  cluster_identifier     = "redshift-cluster-1"
   database_name          = "dev"
-  iam_roles              = [aws_iam_role.myRedshiftRole2.arn, ]
+  iam_roles              = [aws_iam_role.RedshiftRole.arn, ]
   node_type              = "dc2.large"
   cluster_type           = "single-node"
   skip_final_snapshot    = true
@@ -70,11 +70,11 @@ resource "aws_redshift_cluster" "redshift-cluster-2" {
   port                   = 5439
   publicly_accessible    = true
   enhanced_vpc_routing   = false
-  vpc_security_group_ids = [aws_security_group.redshift_security_group2.id, ]
+  vpc_security_group_ids = [aws_security_group.redshift_security_group.id, ]
   depends_on = [
 
-    aws_security_group.redshift_security_group2,
-    aws_iam_role.myRedshiftRole2,
+    aws_security_group.redshift_security_group,
+    aws_iam_role.RedshiftRole,
 
   ]
 
