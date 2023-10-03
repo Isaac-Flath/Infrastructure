@@ -63,7 +63,8 @@ resource "aws_redshift_cluster" "redshift-cluster-1" {
   database_name          = "dev"
   iam_roles              = [aws_iam_role.RedshiftRole.arn, ]
   node_type              = "dc2.large"
-  cluster_type           = "single-node"
+  cluster_type           = "multi-node"
+  number_of_nodes        = 8
   skip_final_snapshot    = true
   master_password        = var.REDSHIFT_CLUSTER_1_PASS
   master_username        = "awsuser"
